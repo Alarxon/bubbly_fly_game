@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3t6drv2c86l"]
+
+[ext_resource type="PackedScene" uid="uid://bqd270m5q3dy1" path="res://Assets/Models/Cuervo_Completo.glb" id="1_lcj6g"]
+[ext_resource type="Script" path="res://cuervo.gd" id="2_nclsm"]
+[ext_resource type="AudioStream" uid="uid://dskv03kastgej" path="res://Assets/Foley/Foley/Foley Condor_1.wav" id="3_32cwj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8h1sr"]
+
+[node name="Cuervo" instance=ExtResource("1_lcj6g")]
+script = ExtResource("2_nclsm")
+
+[node name="CuervoCabeza" parent="Node" index="0"]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, 0, 0, 0, 0.0254, -0.428631, -0.194418, -0.563277)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("SphereShape3D_8h1sr")
+
+[node name="Cuervo" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_32cwj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://c76c8130u5sqw"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_px05h"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/Movimiento/Salto_like_bass.wav" id="2_lki74"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/Fx/Drips_5 4-FX Drip 4.wav" id="3_qyko6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wqxf8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t74vh"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_px05h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wqxf8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_t74vh")
+
+[node name="JumpAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lki74")
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qyko6")

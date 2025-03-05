@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm5n2mx653roh"]
+
+[ext_resource type="Script" path="res://inicio.gd" id="1_1w35h"]
+[ext_resource type="Texture2D" uid="uid://cwsni44fruiop" path="res://Assets/Background/iniciopantalla.png" id="1_v5j06"]
+[ext_resource type="AudioStream" uid="uid://bg7w2wsskxje1" path="res://Assets/Sound/UI/Boton.wav" id="3_vur5h"]
+[ext_resource type="AudioStream" uid="uid://ccsj1fllad1bt" path="res://Assets/Sound/music-master/Flapp Bird Menu Master.wav" id="4_bqjdj"]
+
+[node name="Inicio" type="CanvasLayer"]
+script = ExtResource("1_1w35h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(578, 327.25)
+scale = Vector2(0.597396, 0.603241)
+texture = ExtResource("1_v5j06")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(579, 326)
+scale = Vector2(3.67913, 1.04636)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vur5h")
+volume_db = -25.0
+
+[node name="Background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bqjdj")
+volume_db = -30.0
+
+[connection signal="finished" from="Background" to="." method="_on_background_finished"]

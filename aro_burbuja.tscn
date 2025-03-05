@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvyvvfv708x7j"]
+
+[ext_resource type="PackedScene" uid="uid://c61rxwr415skr" path="res://Assets/Models/Burbujas_Completo.glb" id="1_seuq0"]
+[ext_resource type="AudioStream" uid="uid://dk862v1f0u0ti" path="res://Assets/Sound/Fx/Bubbles_1.wav" id="2_tedfo"]
+[ext_resource type="Script" path="res://aro_burbuja.gd" id="2_v6fa1"]
+[ext_resource type="AudioStream" uid="uid://c42ws17n3ewly" path="res://Assets/Sound/Fx/Bubbles_2.wav" id="3_8o2qu"]
+[ext_resource type="AudioStream" uid="uid://0tm8hdppm12j" path="res://Assets/Sound/Fx/Bubbles_3.wav" id="4_0gc8u"]
+[ext_resource type="Texture2D" uid="uid://bsrapg4rd3usj" path="res://Assets/spark.png" id="6_c2kg4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_do5o8"]
+radius = 0.448577
+
+[sub_resource type="Animation" id="Animation_qxsbk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_f5ts8"]
+resource_name = "destello"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpsk6"]
+_data = {
+"RESET": SubResource("Animation_qxsbk"),
+"destello": SubResource("Animation_f5ts8")
+}
+
+[node name="AroBurbuja" instance=ExtResource("1_seuq0")]
+script = ExtResource("2_v6fa1")
+
+[node name="Node" parent="." index="0"]
+transform = Transform3D(0.162886, 5.69098e-08, -0.34931, 4.75068e-33, -0.385421, -6.27931e-08, -0.34931, 2.65375e-08, -0.162886, -0.0188565, 0.788997, 0.77464)
+
+[node name="Node2" parent="." index="1"]
+transform = Transform3D(0.345164, 0, 0, 0, 0, 0.345164, 0, -0.345164, 0, 0.423841, 0.693246, 0.827958)
+
+[node name="Node3" parent="." index="2"]
+transform = Transform3D(0.345164, 0, 0, 0, 0, 0.345164, 0, -0.345164, 0, 0.636446, 0.693246, 0.708528)
+
+[node name="Node4" parent="." index="3"]
+transform = Transform3D(0.187413, 0, 0, 0, 0, 0.187413, 0, -0.187413, 0, 0.409657, 0.767073, 0.721072)
+
+[node name="Node5" parent="." index="4"]
+transform = Transform3D(0.141024, 0, 0, 0, 0, 0.141024, 0, -0.141024, 0, 0.548063, 0.788784, 0.60571)
+
+[node name="Node6" parent="." index="5"]
+transform = Transform3D(0.345164, 0, 0, 0, 0, 0.345164, 0, -0.345164, 0, -0.250984, 0.722518, -0.0256859)
+
+[node name="Node7" parent="." index="6"]
+transform = Transform3D(0.522155, 0, 0, 0, 0, 0.522155, 0, -0.522155, 0, -0.0428362, 0.639686, -0.210534)
+
+[node name="Node8" parent="." index="7"]
+transform = Transform3D(0.330373, 0, 0, 0, 0, 0.330373, 0, -0.330373, 0, 0.0553265, 0.72944, -0.231774)
+
+[node name="Node9" parent="." index="8"]
+transform = Transform3D(0.23331, 0, 0, 0, 0, 0.23331, 0, -0.23331, 0, -0.106958, 0.774866, -0.405465)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="9"]
+transform = Transform3D(1.26704, 0, 0, 0, 0.605507, 0, 0, 0, 1.7177, 0, 0.615852, 0.270191)
+shape = SubResource("SphereShape3D_do5o8")
+
+[node name="Bubble1" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("2_tedfo")
+volume_db = -20.0
+
+[node name="Bubble2" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("3_8o2qu")
+volume_db = -20.0
+
+[node name="Bubble3" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource("4_0gc8u")
+volume_db = -20.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="13"]
+transform = Transform3D(0.235605, 0, 0, 0, 0.0688378, 0.041671, 0, -0.215944, 0.0132837, 0.0293307, 0.813186, 0.083714)
+texture = ExtResource("6_c2kg4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="14"]
+libraries = {
+"": SubResource("AnimationLibrary_cpsk6")
+}
+autoplay = "destello"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3 uid="uid://df5j1udfv51lk"]
+
+[ext_resource type="PackedScene" uid="uid://bbu7dl8aq32tt" path="res://Assets/Models/Cabeza_Personaje.glb" id="1_vqg1r"]
+[ext_resource type="Script" path="res://bubble.gd" id="2_liydw"]
+[ext_resource type="Shader" path="res://prueba.gdshader" id="3_3cedv"]
+[ext_resource type="AudioStream" uid="uid://kd1ub87wjp21" path="res://Assets/Sound/Movimiento/Salto_3.wav" id="3_l3w3c"]
+[ext_resource type="AudioStream" uid="uid://cdag8obfkkw7h" path="res://Assets/Sound/Fx/Drips_5 4-FX Drip 4.wav" id="4_logtk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fk02d"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i3gyv"]
+seamless = true
+noise = SubResource("FastNoiseLite_fk02d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vr000"]
+render_priority = 0
+shader = ExtResource("3_3cedv")
+shader_parameter/bubble_color = Color(2.40654e-08, 9.62615e-08, 0.406719, 1)
+shader_parameter/height_multiplier = 0.5
+shader_parameter/noise_sample_size = 0.1
+shader_parameter/animation_speed = 0.1
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_i3gyv")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yvvh8"]
+radius = 0.44136
+
+[node name="Bubble" instance=ExtResource("1_vqg1r")]
+collision_mask = 2
+script = ExtResource("2_liydw")
+
+[node name="Cabeza" parent="Node" index="0"]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, 0, 0, 0, 0.0254, -0.485791, 0, -1.91203)
+surface_material_override/0 = SubResource("ShaderMaterial_vr000")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("SphereShape3D_yvvh8")
+
+[node name="JumpAudio" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_l3w3c")
+
+[node name="Death" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_logtk")

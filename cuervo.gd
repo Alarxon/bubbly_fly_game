@@ -1,0 +1,26 @@
+extends Area3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if(Global.colideCuervo == 0):
+		if(body.name == "Bubble" || body.name == "Cuerpo1" || body.name == "Cuerpo2"
+			|| body.name == "Cuerpo3" || body.name == "Cola"):
+			Global.childrenPlayer = Global.childrenPlayer - 1
+			Global.colideCuervo = 1
+		if(Global.childrenPlayer < 0):
+				Global.gameOver = true
+	#monitorable = false
+	#monitoring  = false
+
+func reset_scene():
+	get_tree().change_scene_to_file("res://level.tscn")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://q1o2txis65e5"]
+
+[ext_resource type="Shader" path="res://prueba.gdshader" id="1_hai6m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yqjkr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sm0ym"]
+seamless = true
+noise = SubResource("FastNoiseLite_yqjkr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njhsf"]
+render_priority = 0
+shader = ExtResource("1_hai6m")
+shader_parameter/bubble_color = null
+shader_parameter/height_multiplier = 0.5
+shader_parameter/noise_sample_size = 0.1
+shader_parameter/animation_speed = 0.1
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_sm0ym")
+
+[sub_resource type="SphereMesh" id="SphereMesh_t7v6u"]
+material = SubResource("ShaderMaterial_njhsf")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wxwfe"]
+
+[sub_resource type="Sky" id="Sky_epi57"]
+sky_material = SubResource("ProceduralSkyMaterial_wxwfe")
+
+[sub_resource type="Environment" id="Environment_uhwwd"]
+background_mode = 2
+sky = SubResource("Sky_epi57")
+
+[sub_resource type="BoxMesh" id="BoxMesh_os57r"]
+
+[node name="prueba" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_t7v6u")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0199304, 0, 0.999801, 0, 1, 0, -0.999801, 0, 0.0199304, 2.79152, 0, -0.0300808)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.999823, 0, -0.0188311, 0, 1, 0, 0.0188311, 0, -0.999823, 0, 0, -3.24982)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uhwwd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9941, 0, 0)
+mesh = SubResource("BoxMesh_os57r")

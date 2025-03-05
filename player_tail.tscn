@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://dkfpn5emqtpv1"]
+
+[ext_resource type="Script" path="res://player_tail.gd" id="1_83b6r"]
+[ext_resource type="AudioStream" uid="uid://daqx30hqrrlxe" path="res://Assets/Sound/Fx/Drips 1-FX Water.wav" id="2_t4yv0"]
+[ext_resource type="AudioStream" uid="uid://vf60mra2ebng" path="res://Assets/Sound/Fx/Drips 2-FX Water.wav" id="3_arkem"]
+[ext_resource type="AudioStream" uid="uid://bofkai6bobe24" path="res://Assets/Sound/Fx/Drips 3-FX Water.wav" id="4_kvf3g"]
+[ext_resource type="AudioStream" uid="uid://bo7tphg5jii82" path="res://Assets/Sound/Fx/Drips 4-FX Water.wav" id="5_g0tke"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2uf4q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j6dn0"]
+
+[sub_resource type="Animation" id="Animation_10arw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l1gwf"]
+resource_name = "blow_tail"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.8, 0.8, 0.8), Vector3(0.6, 0.6, 0.6), Vector3(0.4, 0.4, 0.4), Vector3(0.2, 0.2, 0.2), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwblk"]
+_data = {
+"RESET": SubResource("Animation_10arw"),
+"blow_tail": SubResource("Animation_l1gwf")
+}
+
+[node name="PlayerTail" type="CharacterBody3D"]
+script = ExtResource("1_83b6r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_2uf4q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_j6dn0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bwblk")
+}
+
+[node name="Drip1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_t4yv0")
+
+[node name="Drip2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_arkem")
+
+[node name="Drip3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kvf3g")
+
+[node name="Drip4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_g0tke")

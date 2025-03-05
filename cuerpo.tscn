@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://wqbp8xmul0n7"]
+
+[ext_resource type="PackedScene" uid="uid://boi4wbag2quhx" path="res://Assets/Models/Cuerpo_Personaje.glb" id="1_ursr0"]
+[ext_resource type="Script" path="res://cuerpo.gd" id="2_pbvos"]
+[ext_resource type="AudioStream" uid="uid://daqx30hqrrlxe" path="res://Assets/Sound/Fx/Drips 1-FX Water.wav" id="3_7ibjb"]
+[ext_resource type="Shader" path="res://prueba.gdshader" id="3_gyv5g"]
+[ext_resource type="AudioStream" uid="uid://vf60mra2ebng" path="res://Assets/Sound/Fx/Drips 2-FX Water.wav" id="4_ndkdo"]
+[ext_resource type="AudioStream" uid="uid://bofkai6bobe24" path="res://Assets/Sound/Fx/Drips 3-FX Water.wav" id="5_05730"]
+[ext_resource type="AudioStream" uid="uid://bo7tphg5jii82" path="res://Assets/Sound/Fx/Drips 4-FX Water.wav" id="6_iqeue"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rfmkb"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_flyvf"]
+seamless = true
+noise = SubResource("FastNoiseLite_rfmkb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwtto"]
+render_priority = 0
+shader = ExtResource("3_gyv5g")
+shader_parameter/bubble_color = Color(0, 0, 0.407843, 1)
+shader_parameter/height_multiplier = 0.5
+shader_parameter/noise_sample_size = 0.1
+shader_parameter/animation_speed = 0.1
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_flyvf")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n68lm"]
+radius = 0.369932
+
+[sub_resource type="Animation" id="Animation_10arw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l1gwf"]
+resource_name = "blow_tail"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.8, 0.8, 0.8), Vector3(0.6, 0.6, 0.6), Vector3(0.4, 0.4, 0.4), Vector3(0.2, 0.2, 0.2), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwblk"]
+_data = {
+"RESET": SubResource("Animation_10arw"),
+"blow_tail": SubResource("Animation_l1gwf")
+}
+
+[node name="Cuerpo" instance=ExtResource("1_ursr0")]
+collision_mask = 2
+script = ExtResource("2_pbvos")
+
+[node name="Cuerpo" parent="Node" index="0"]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, 0, 0, 0, 0.0254, 0.433299, 0, -1.96414)
+surface_material_override/0 = SubResource("ShaderMaterial_wwtto")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("SphereShape3D_n68lm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_bwblk")
+}
+
+[node name="Drip1" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("3_7ibjb")
+
+[node name="Drip2" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("4_ndkdo")
+
+[node name="Drip3" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("5_05730")
+
+[node name="Drip4" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("6_iqeue")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bo7tphg5jii82"
+path="res://.godot/imported/Drips 4-FX Water.wav-0a226f23b8ff009869c87410998bf1ed.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Fx/Drips 4-FX Water.wav"
+dest_files=["res://.godot/imported/Drips 4-FX Water.wav-0a226f23b8ff009869c87410998bf1ed.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

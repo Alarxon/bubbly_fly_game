@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbsowvx7eybkg"
+path="res://.godot/imported/Flapp Gusano Level Master.wav-921fe7b558bb53c41a270dee00dddd57.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/music-master/Flapp Gusano Level Master.wav"
+dest_files=["res://.godot/imported/Flapp Gusano Level Master.wav-921fe7b558bb53c41a270dee00dddd57.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
